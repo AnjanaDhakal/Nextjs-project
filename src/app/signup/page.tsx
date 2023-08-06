@@ -1,0 +1,94 @@
+"use client";
+import Link from "next/link";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+
+export default function SignupPage() {
+  const router = useRouter();
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+    username: "",
+  });
+  const [bottonDisabled, setButtonDisabled] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const onSignup = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/users/signup", user);
+      console.log("Signup success", response.data);
+      router.push("/login");
+    } catch (error: any) {
+      console.log("Signup failed", error.message), toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      user.email.length > 0 &&
+      user.password.length > 0 &&
+      user.username.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <h1 className="font-bold p-3 text-lg">
+        {loading ? "Processing" : "Signup"}
+      </h1>
+      <hr />
+
+      <label className="pr-40" htmlFor="username">
+        Username
+      </label>
+      <input
+        className="text-black p-2 border-gray-400 border rounded-lg mb-2 focus:outline-none focus:outline-gray-700"
+        id="username"
+        type="text"
+        value={user.username}
+        onChange={(e) => setUser({ ...user, username: e.target.value })}
+        placeholder="username"
+      ></input>
+
+      <label className="pr-44" htmlFor="Email">
+        Email
+      </label>
+      <input
+        className="text-black p-2 border-gray-400 border rounded-lg mb-2 focus:outline-none focus:outline-gray-700"
+        id="Email"
+        type="text"
+        value={user.email}
+        onChange={(e) => setUser({ ...user, email: e.target.value })}
+        placeholder="Email"
+      ></input>
+
+      <label className="pr-40" htmlFor="Password">
+        Password
+      </label>
+      <input
+        className="text-black p-2 border-gray-400 border rounded-lg mb-2 focus:outline-none focus:outline-gray-700"
+        id="Password"
+        type="password"
+        value={user.password}
+        onChange={(e) => setUser({ ...user, password: e.target.value })}
+        placeholder="Password"
+      ></input>
+
+      <button
+        onClick={onSignup}
+        className="p-2 border-gray-400 border rounded-lg mb-2 focus:outline-none focus:outline-gray-700"
+      >
+        {bottonDisabled ? "No signup" : "Signup"}
+      </button>
+      <Link href="/login">Login here</Link>
+    </div>
+  );
+}
