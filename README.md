@@ -32,3 +32,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+page:
+![Screenshot (102)](https://github.com/AnjanaDhakal/Nextjs_Project_Login_MongoDB/assets/80588450/8976a02c-10ea-46ad-8d4e-2844290a1aa4)
+
+
+
+![Screenshot (101)](https://github.com/AnjanaDhakal/Nextjs_Project_Login_MongoDB/assets/80588450/4a0a3954-2036-4e36-b2af-d68d79456aa3)
